@@ -2,7 +2,7 @@ name: Agent D - PERP Monitor
 
 on:
   schedule:
-    - cron: "*/20 * * * *"   # Every 20 minutes
+    - cron: "*/20 * * * *"
   workflow_dispatch:
 
 jobs:
@@ -23,9 +23,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Install Playwright browsers
-        run: |
-          playwright install --with-deps chromium
+      - name: Install Playwright Browsers
+        uses: microsoft/playwright-github-action@v1
+        with:
+          version: '1.41.2'
 
       - name: Run Agent D (PERP monitor)
         run: python agentD.py
